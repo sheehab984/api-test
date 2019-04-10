@@ -35,23 +35,25 @@ th {
 	  <table class="table table-bordered table-striped">
 	    <thead>
 			<tr>
+				<th>ItemCode</th>
 				<th>CurrentStock</th>
-					<th>ItemCode</th>
 				<th>ItemDescription</th>
 				<th>WarehouseDescription</th>
+				<th>Stock</th>
+				<th>ItemGroupCode</th>
+				<th>ID</th>
 			</tr>
 			<tbody id="myTable">
 				{% for item in data %}
 					<tr>
+						<td>{{ item.ItemCode }}{{ item.Code }}</td></td>
 						<td>{{ item.CurrentStock }}</td>
-						<td>{{ item.ItemCode }}</td>
 						<td>{{ item.ItemDescription }}</td>
 						<td>{{ item.WarehouseDescription }}</td>
-
 						<td>{{ item.Stock }}</td>
-						<td>{{ item.Code }}</td>
 						<td>{{ item.ItemGroupCode }}</td>
 						<td>{{ item.ID }}</td>
+					</tr>
 				{% endfor %}
 			</tbody>
 		</thead>
@@ -69,5 +71,15 @@ $(document).ready(function(){
   });
 });
 </script>
-
+<script>
+var seen = {};
+$('table tr').each(function() {
+    var txt = $(this).children("td:eq(0)").text();
+    console.log(txt)
+    if (seen[txt])
+        $(this).remove();
+    else
+        seen[txt] = true;
+});
+</script>
 </html>
