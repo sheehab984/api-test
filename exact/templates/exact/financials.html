@@ -1,23 +1,25 @@
+{% load mathfilters %}
 <html>
 <head>
-	<title>Document</title>
+	<title>Financials // Lichtplanners</title>
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.css">
+	<script>
+	function timeConverter(UNIX_timestamp){
+	  var a = new Date(UNIX_timestamp);
+	  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+	  var year = a.getFullYear();
+	  var month = months[a.getMonth()];
+	  var date = a.getDate();
+	  var time = date + ' ' + month + ' ' + year + ' ';
+	  return time;
+	}
+	</script>
 </head>
-<script>
-function timeConverter(UNIX_timestamp){
-  var a = new Date(UNIX_timestamp);
-  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  var year = a.getFullYear();
-  var month = months[a.getMonth()];
-  var date = a.getDate();
-  var time = date + ' ' + month + ' ' + year + ' ';
-  return time;
-}
-</script>
 <style>
 table {
   border-collapse: collapse;
@@ -32,40 +34,79 @@ th, td {
 tr:nth-child(even){background-color: #f2f2f2}
 
 th {
-  background-color: #4CAF50;
+  background-color: #2477B8;
   color: white;
 }
 </style>
 
 <body>
-	<div class="container">
-	  <h2>Filterable Table</h2>
-	  <p>Type something in the input field to search the table for first names, last names or emails:</p>
-	  <input class="form-control" id="myInput" type="text" placeholder="Search..">
-	  <br>
-	  <table class="table table-bordered table-striped">
+	<div class="fixed-table-container fixed-height" style="height 480px;">
+
+
+<div class="container">
+	<div class=" btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups" style="margin-top: 10px; padding-top: 10px">
+		<h2>Financials</h2>
+	  <div class="btn-group float-right"  style="margin-bottom: 10px; padding-bottom: 10px" role="group" aria-label="First group">
+			 <button type="button" class="btn btn-secondary"><a href="{% url 'exact:index' %}" style="color: #fff"> Home </a></button>
+			 <button type="button" class="btn btn-secondary"><a href="{% url 'exact:inv' %}" style="color: #fff">Voorraad</a></button>
+			 <button type="button" class="btn btn-secondary"><a href="{% url 'exact:financials' %}" style="color: #fff">Openstaande posten</a></button>
+		 </div>
+	</div>
+	  <table class="table table-bordered table-hover" data-toggle="table" data-pagination="true" data-search="true" >
 	    <thead>
 			<tr>
-				<th>S/N</th>
-				<th>Account Name</th>
-				<th>InvoiceDate</th>
-				<th>InvoiceNumber</th>
-				<th>Amount</th>
-				<th>DueDate</th>
+				<th data-sortable="true">Account Name</th>
+				<th data-sortable="true">InvoiceDate</th>
+				<th data-sortable="true">InvoiceNumber</th>
+				<th data-sortable="true">Amount</th>
+				<th data-sortable="true">DueDate</th>
+				<th data-sortable="true">Document date</th>
+				<th data-sortable="true">Bestandsnaam </th>
+				<th data-sortable="true">Document View Url</th>
+				<th data-sortable="true">Bestandsgroote </th>
 			</tr>
-			<tbody>
-				{% for item in data %}
+
+			<tbody id="myTable">
+
+				{% for item1 in data1 %}
 					<tr>
-						<td>{{ forloop.counter }}</td>
-						<td>{{ item.AccountName }}</td>
-						<td>	<script type="text/javascript">
-				document.write(timeConverter({{ item.InvoiceDate|slice:"6:19" }}))
-			</script></td>
-						<td>{{ item.InvoiceNumber }}</td>
-						<td>{{ item.Amount }}</td>
-						<td>	<script type="text/javascript">
-        document.write(timeConverter({{ item.DueDate|slice:"6:19" }}))
-			</script></td>
+
+
+							{% for item2 in data2 %}
+								{% if item1.InvoiceNumber == item2.SalesInvoiceNumber %}
+
+
+
+								<td>{{ item1.AccountName }}</td>
+								<td>	<script type="text/javascript">
+								document.write(timeConverter({{ item1.InvoiceDate|slice:"6:19" }}))
+								</script></td>
+								<td>{{ item1.InvoiceNumber }}</td>
+								<td>{{ item1.Amount }}</td>
+								<td style="color: red; ">	<script type="text/javascript">
+		      		  document.write(timeConverter({{ item1.DueDate|slice:"6:19" }}))
+								</script></td>
+								<td>	<script type="text/javascript">
+								document.write(timeConverter({{ item2.DocumentDate|slice:"6:19" }}))
+								</script></td>
+
+									{% for item3 in data3 %}
+										{% if item2.ID == item3.Document %}
+
+																				<td>{{ item3.FileName }}</td>
+																				<td><a href="{{ item3.Url }}">Link</a></td>
+																				<td>{{ item3.FileSize|div:1000 }} MB</td>
+
+
+										{% endif %}
+									{% endfor %}
+
+
+
+
+								{% endif %}
+							{% endfor %}
+
 				{% endfor %}
 			</tbody>
 		</thead>

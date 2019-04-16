@@ -1,12 +1,14 @@
 {% load mathfilters %}
 <html>
 <head>
-	<title>Voorraad Lichtplanners / Jibe </title>
+	<title>Voorraad // Lichtplanners </title>
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.css">
+
 </head>
 <style>
 table {
@@ -22,63 +24,80 @@ th, td {
 tr:nth-child(even){background-color: #f2f2f2}
 
 th {
-  background-color: #4CAF50;
+  background-color: #2477B8;
   color: white;
 }
 </style>
 
 <body>
-	<div class="container">
-	  <h2>Filterable Table</h2>
-	  <p>Type something in the input field to search the table for first names, last names or emails:</p>
-	  <input class="form-control" id="myInput" type="text" placeholder="Search..">
-	  <br>
-	  <table class="table table-bordered table-striped">
+	<div class="fixed-table-container fixed-height" style="height 480px;">
+
+
+<div class="container">
+	<div class=" btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups" style="margin-top: 10px; padding-top: 10px">
+		<h2>Voorraad</h2>
+	  <div class="btn-group float-right" role="group" aria-label="First group">
+	    <button type="button" class="btn btn-secondary"><a href="{% url 'exact:index' %}" style="color: #fff"> Home </a></button>
+	    <button type="button" class="btn btn-secondary"><a href="{% url 'exact:inv' %}" style="color: #fff">Voorraad</a></button>
+	    <button type="button" class="btn btn-secondary"><a href="{% url 'exact:financials' %}" style="color: #fff">Openstaande posten</a></button>
+	  </div>
+	</div>
+	  <table class="table table-bordered table-hover" data-toggle="table" data-pagination="true" data-search="true" >
 	    <thead>
 			<tr>
-				<th>ItemCode</th>
-				<th>ItemDescription</th>
-				<th>Voorraad Lichtplanners</th>
-				<th>Vooraad Jibe</th>
-				<th>Vooraad Totaal</th>
-				<th>ItemGroupCode</th>
-				<th>Foto</th>
+				<th data-sortable="true"  style="padding: 0">ItemCode</th>
+					<th data-sortable="true">ItemDescription</th>
+					<th data-sortable="true">Voorraad Lichtplanners</th>
+					<th data-sortable="true">Vooraad Jibe</th>
+					<th data-sortable="true">Vooraad Totaal</th>
+					<th data-sortable="true">Foto</th>
+					<th data-sortable="true">&euro;</th>
+					<th data-sortable="true">&euro;</th>
 			</tr>
 
 			<tbody id="myTable">
 				{% for item in data1 %}
 					<tr>
-                        {% for item2 in data2 %}
-                            {% if item.ItemCode == item2.Code %}
-																<td>{{ item.ItemCode }}</td>
-																<td>{{ item.ItemDescription }}</td>
-																{% if item.CurrentStock == 0 %}
-																<td> - </td>
-																{% else %}
-																<td>{{ item.CurrentStock }}</td>
-																{% endif %}
-																{% if item2.Stock|sub:item.CurrentStock == "" %}
-																<td> - </td>
-																{% elif item2.Stock|sub:item.CurrentStock == 0 %}
-																<td> - </td>
-																{% else %}
-																<td>{{ item2.Stock|sub:item.CurrentStock}}</td>
-																{% endif %}
-																{% if item2.Stock == None %}
-																<td> - </td>
-																{% else %}
-																<td>{{ item2.Stock }}</td>
-																{% endif %}
-                                <td>{{ item2.ItemGroupCode }}</td>
-																<td><img src="{{ item2.PictureThumbnailUrl }}" alt="" border=3 height=100 width=100></img></td>
-                            {% endif %}
-                        {% endfor %}
+										{% for item2 in data2 %}
+			              	{% if item.ItemCode == item2.Code %}
+																							<td>{{ item.ItemCode }}</td>
+																							<td>{{ item.ItemDescription }}</td>
+																							{% if item.CurrentStock == 0 %}
+																							<td> - </td>
+																							{% else %}
+																							<td>{{ item.CurrentStock }}</td>
+																							{% endif %}
+																							{% if item2.Stock|sub:item.CurrentStock == "" %}
+																							<td> - </td>
+																							{% elif item2.Stock|sub:item.CurrentStock == 0 %}
+																							<td> - </td>
+																							{% else %}
+																							<td>{{ item2.Stock|sub:item.CurrentStock}}</td>
+																							{% endif %}
+																							{% if item2.Stock == None %}
+																							<td> - </td>
+																							{% else %}
+																							<td>{{ item2.Stock }}</td>
+																							{% endif %}
+																							<td><img src="{{ item2.PictureThumbnailUrl }}" alt="" border=3 height=100 width=100></img></td>
+
+												{% for item3 in data3 %}
+										 			{% if item.ItemCode == item3.ItemCode %}
+
+																							<td>{{ item3.Price }}</td>
+
+										 			{% endif %}
+					          		{% endfor %}
+
+                    	{% endif %}
+										{% endfor %}
 
 					</tr>
 				{% endfor %}
 			</tbody>
 		</thead>
 	</table>
+	</div>
 	</div>
     {% for i in data %}
         {{ i }}<br><br>
@@ -105,4 +124,5 @@ $('table tr').each(function() {
         seen[txt] = true;
 });
 </script>
+<script src="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.js"></script>
 </html>

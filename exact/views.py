@@ -89,48 +89,6 @@ def webhook(request):
 		logger.debug("error: " + request.body)
 		return HttpResponseBadRequest(e)
 
-def documents_view(request):
-	e = Exact()
-
-	# first param is the resource.
-	# see https://start.exactonline.nl/docs/HlpRestAPIResources.aspx
-
-	# filter returns a generator and handles pagination for you
-	data = []
-	for item in e.filter("documents/Documents", filter_string="substringof('Lichtplanners B.V.', AccountName) eq true"):
-		data.append(item)
-		print(item.keys())
-	print(data[0])
-	return render(request, 'exact/documents.html', locals())
-
-def logistics_view(request):
-	e = Exact()
-
-	# first param is the resource.
-	# see https://start.exactonline.nl/docs/HlpRestAPIResources.aspx
-
-	# filter returns a generator and handles pagination for you
-	data = []
-	for item in e.filter("logistics/Items", filter_string="substringof('LG', ItemGroupCode) eq true"):
-		data.append(item)
-		print(item.keys())
-	print(data[0])
-	return render(request, 'exact/logistics.html', locals())
-
-def itemgroup_view(request):
-	e = Exact()
-
-	# first param is the resource.
-	# see https://start.exactonline.nl/docs/HlpRestAPIResources.aspx
-
-	# filter returns a generator and handles pagination for you
-	data = []
-	for item in e.filter("logistics/ItemGroups", filter_string=None, select=None):
-		data.append(item)
-		print(item.keys())
-	print(data[0])
-	return render(request, 'exact/itemgroup.html', locals())
-
 
 def inv_view(request):
 	e = Exact()
@@ -150,6 +108,13 @@ def inv_view(request):
 	for item in e.filter("logistics/Items", filter_string="substringof('LG', ItemGroupCode) eq true and IsSalesItem eq true"):
 		data2.append(item)
 
+	df2 = pd.DataFrame.from_records(data2)
+
+	data3 = []
+	for item in e.filter("logistics/SalesItemPrices", filter_string="EndDate eq null", select="ItemCode, Price, EndDate"):
+		data3.append(item)
+
+
 	return render(request, 'exact/inv.html', locals())
 
 def financials_view(request):
@@ -159,28 +124,25 @@ def financials_view(request):
 	# see https://start.exactonline.nl/docs/HlpRestAPIResources.aspx
 
 	# filter returns a generator and handles pagination for you
-	data = []
+	data1 = []
 	for item in e.filter("read/financial/ReceivablesListByAccount?accountId=guid'cd8e894a-4a04-47ae-bfd5-da46ef20261c'"):
-		data.append(item)
-		print(item.keys())
+		data1.append(item)
+
+	df1 = pd.DataFrame.from_records(data1)
+
+	data2 = []
+	for item in e.filter("documents/Documents", filter_string="substringof('Lichtplanners B.V.', AccountName) eq true"):
+		data2.append(item)
+
+	df2 = pd.DataFrame.from_records(data2)
+
+	data3 = []
+	for item in e.filter("documents/DocumentAttachments"):
+		data3.append(item)
 
 	return render(request, 'exact/financials.html', locals())
 
 
-
-def attachments_view(request):
-	e = Exact()
-
-	# first param is the resource.
-	# see https://start.exactonline.nl/docs/HlpRestAPIResources.aspx
-
-	# filter returns a generator and handles pagination for you
-	data = []
-	for item in e.filter("documents/DocumentAttachments"):
-		data.append(item)
-		print(item.keys())
-	print(data[0])
-	return render(request, 'exact/attachments.html', locals())
 
 def index(request):
     return render(request, 'exact/index.html')
