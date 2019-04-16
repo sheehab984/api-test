@@ -1,6 +1,7 @@
+{% load mathfilters %}
 <html>
 <head>
-	<title>Document</title>
+	<title>Voorraad Lichtplanners / Jibe </title>
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -36,30 +37,52 @@ th {
 	    <thead>
 			<tr>
 				<th>ItemCode</th>
-				<th>CurrentStock</th>
 				<th>ItemDescription</th>
-				<th>WarehouseDescription</th>
-				<th>Stock</th>
+				<th>Voorraad Lichtplanners</th>
+				<th>Vooraad Jibe</th>
+				<th>Vooraad Totaal</th>
 				<th>ItemGroupCode</th>
-				<th>ID</th>
+				<th>Foto</th>
 			</tr>
+
 			<tbody id="myTable">
-				{% for item in data %}
+				{% for item in data1 %}
 					<tr>
-						<td>{{ item.ItemCode }}{{ item.Code }}</td></td>
-						<td>{{ item.CurrentStock }}</td>
-						<td>{{ item.ItemDescription }}</td>
-						<td>{{ item.WarehouseDescription }}</td>
-						<td>{{ item.Stock }}</td>
-						<td>{{ item.ItemGroupCode }}</td>
-						<td>{{ item.ID }}</td>
+                        {% for item2 in data2 %}
+                            {% if item.ItemCode == item2.Code %}
+																<td>{{ item.ItemCode }}</td>
+																<td>{{ item.ItemDescription }}</td>
+																{% if item.CurrentStock == 0 %}
+																<td> - </td>
+																{% else %}
+																<td>{{ item.CurrentStock }}</td>
+																{% endif %}
+																{% if item2.Stock|sub:item.CurrentStock == "" %}
+																<td> - </td>
+																{% elif item2.Stock|sub:item.CurrentStock == 0 %}
+																<td> - </td>
+																{% else %}
+																<td>{{ item2.Stock|sub:item.CurrentStock}}</td>
+																{% endif %}
+																{% if item2.Stock == None %}
+																<td> - </td>
+																{% else %}
+																<td>{{ item2.Stock }}</td>
+																{% endif %}
+                                <td>{{ item2.ItemGroupCode }}</td>
+																<td><img src="{{ item2.PictureThumbnailUrl }}" alt="" border=3 height=100 width=100></img></td>
+                            {% endif %}
+                        {% endfor %}
+
 					</tr>
 				{% endfor %}
 			</tbody>
 		</thead>
 	</table>
 	</div>
-
+    {% for i in data %}
+        {{ i }}<br><br>
+    {% endfor %}
 </body>
 <script>
 $(document).ready(function(){

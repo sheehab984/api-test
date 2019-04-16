@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 import json
 import logging
+import pandas as pd
 from datetime import datetime
 
 from django.contrib.auth.decorators import user_passes_test
@@ -15,6 +16,8 @@ from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView, RedirectView
+
+from itertools import chain
 
 from exact.api import Exact
 
@@ -136,15 +139,16 @@ def inv_view(request):
 	# see https://start.exactonline.nl/docs/HlpRestAPIResources.aspx
 
 	# filter returns a generator and handles pagination for you
-	data = []
+	data1 = []
 	for item in e.filter("inventory/ItemWarehouses",  filter_string=None, select="CurrentStock, ItemCode, ItemDescription, WarehouseDescription"):
-		data.append(item)
-		print(item.keys())
+		data1.append(item)
 
-	for item in e.filter("logistics/Items", filter_string="substringof('LG', ItemGroupCode) eq true"):
-		data.append(item)
-		print(item.keys())
-	print(data[0:1])
+
+	df1 = pd.DataFrame.from_records(data1)
+
+	data2 = []
+	for item in e.filter("logistics/Items", filter_string="substringof('LG', ItemGroupCode) eq true and IsSalesItem eq true"):
+		data2.append(item)
 
 	return render(request, 'exact/inv.html', locals())
 
@@ -159,7 +163,7 @@ def financials_view(request):
 	for item in e.filter("read/financial/ReceivablesListByAccount?accountId=guid'cd8e894a-4a04-47ae-bfd5-da46ef20261c'"):
 		data.append(item)
 		print(item.keys())
-	print(data[0])
+
 	return render(request, 'exact/financials.html', locals())
 
 

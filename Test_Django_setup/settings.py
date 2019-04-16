@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'jet_django',
     'exact',
+    'mathfilters',
 ]
 
 SITE_ID = 1
@@ -125,7 +126,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 EXACT_ONLINE_API_URL = "https://start.exactonline.nl/api"
-EXACT_ONLINE_CLIENT_ID = "10d49bca-3657-41d2-ad9c-c398c4e32aef"
-EXACT_ONLINE_CLIENT_SECRET = "2hYy8XZqigMp"
+EXACT_ONLINE_CLIENT_ID = "1c471360-92a0-4149-a90b-af886be7799f"
+EXACT_ONLINE_CLIENT_SECRET = "MHmMzaijm3W0"
 EXACT_ONLINE_REDIRECT_URI = "http://127.0.0.1:8000/exact/authenticate"
 EXACT_ONLINE_DIVISION = 1064303
