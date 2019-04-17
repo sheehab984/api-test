@@ -86,6 +86,11 @@ DATABASES = {
     }
 }
 
+DATABASES = {
+    'default': os.getenv('DJANGO_DB_URL', 'db.sqlite3'),
+}
+DATABASES['default']['ATOMIC_REQUESTS'] = True
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
