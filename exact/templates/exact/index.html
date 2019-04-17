@@ -25,17 +25,35 @@
 				    <button type="button" class="btn btn-secondary"><a href="{% url 'exact:index' %}" style="color: #fff"> Home </a></button>
 				    <button type="button" class="btn btn-secondary"><a href="{% url 'exact:inv' %}" style="color: #fff">Voorraad</a></button>
 				    <button type="button" class="btn btn-secondary"><a href="{% url 'exact:financials' %}" style="color: #fff">Openstaande posten</a></button>
+            <button type="button" class="btn btn-secondary"><a href="{% url 'exact:status' %}" style="color: #fff">Login</a></button>
 				  </div>
 				</div>
 			</div>
+      <SCRIPT>
+function passWord() {
+var testV = 1;
+var pass1 = prompt('Please Enter Your Password',' ');
+while (testV < 3) {
+if (!pass1)
+history.go(-1);
+if (pass1.toLowerCase() == "letmein") {
+alert('You Got it Right!');
+window.open('www.wikihow.com');
+break;
+}
+testV+=1;
+var pass1 =
+prompt('Access Denied - Password Incorrect, Please Try Again.','Password');
+}
+if (pass1.toLowerCase()!="password" & testV ==3)
+history.go(-1);
+return " ";
+}
+</SCRIPT>
   </head>
 
   <body>
-    {% if request.user.is_superuser %}
-      <a href="{% url 'admin:index' %}">Django Admin</a>
-    {% endif %}
-
-    <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+      <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
       <div class="col-md-5 p-lg-5 mx-auto my-5">
         <h1 class="display-4 font-weight-normal">Welkom Lichtplanners</h1>
         <p class="lead font-weight-normal">Dit is de online portaal van Jibe, klik op een van de knoppen om te beginnen!</p>
