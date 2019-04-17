@@ -84,7 +84,7 @@ DATABASES = {
 'default': os.getenv('DJANGO_DB_URL')
 }
 
-DATABASES['default']['ATOMIC_REQUESTS'] = True
+
 
 
 # Password validation
