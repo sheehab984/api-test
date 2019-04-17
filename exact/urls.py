@@ -12,3 +12,10 @@ urlpatterns = [
 	url(r'^webhook', webhook, name="webhook"),
 	url(r'^.*$', index, name='index'),
 ]
+
+import settings
+urlpatterns += patterns('',
+    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {
+        'document_root': settings.STATIC_ROOT,
+    }),
+)
