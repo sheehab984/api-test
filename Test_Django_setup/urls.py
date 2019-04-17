@@ -22,7 +22,7 @@ from jet_django.urls import jet_urls
 from exact import views
 
 urlpatterns = [
-    url(r'^.*$', views.index, name='index'),
+    url('', views.index, name='index'),
     path('admin/', admin.site.urls),
     url(r'^exact/', include(('exact.urls', 'exact'), namespace='exact')),
     url(r'^jet_api/', include(jet_urls)),
