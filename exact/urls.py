@@ -10,6 +10,6 @@ urlpatterns = [
 	url(r'^inv', inv_view, name="inv"),
 	url(r'^financials', financials_view, name="financials"),
 	url(r'^webhook', webhook, name="webhook"),
-	url(r'^$', views.index, name='index'),
+	url(r'^$', index, name='index'),
 
 ]
