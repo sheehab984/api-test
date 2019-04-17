@@ -127,7 +127,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 EXACT_ONLINE_API_URL = "https://start.exactonline.nl/api"
 EXACT_ONLINE_CLIENT_ID = "1c471360-92a0-4149-a90b-af886be7799f"
 EXACT_ONLINE_CLIENT_SECRET = "MHmMzaijm3W0"
-EXACT_ONLINE_REDIRECT_URI = "http://127.0.0.1:8000/exact/authenticate"
+EXACT_ONLINE_REDIRECT_URI = "https://cryptic-dusk-50681.herokuapp.com/exact/authenticate"
 EXACT_ONLINE_DIVISION = 1064303
 
 django_heroku.settings(locals())
