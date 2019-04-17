@@ -25,7 +25,7 @@ SECRET_KEY = 'a9-1*l29^fp7*0k0x45gd*1y7ji7!z4fz$bah#d5!#_lv@6ts2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [https://cryptic-dusk-50681.herokuapp.com/, 127.0.0.1:8000]
 
 
 # Application definition
@@ -122,8 +122,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
-
-STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 EXACT_ONLINE_API_URL = "https://start.exactonline.nl/api"
 EXACT_ONLINE_CLIENT_ID = "1c471360-92a0-4149-a90b-af886be7799f"
