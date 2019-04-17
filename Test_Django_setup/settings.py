@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -80,8 +81,12 @@ WSGI_APPLICATION = 'Test_Django_setup.wsgi.application'
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
 DATABASES = {
-    'default': os.getenv('DJANGO_DB_URL', 'db.sqlite3'),
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
+
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
 
@@ -127,3 +132,5 @@ EXACT_ONLINE_CLIENT_ID = "1c471360-92a0-4149-a90b-af886be7799f"
 EXACT_ONLINE_CLIENT_SECRET = "MHmMzaijm3W0"
 EXACT_ONLINE_REDIRECT_URI = "http://127.0.0.1:8000/exact/authenticate"
 EXACT_ONLINE_DIVISION = 1064303
+
+django_heroku.settings(locals())
