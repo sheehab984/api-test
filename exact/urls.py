@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 from django.conf.urls import url
 
-from .views import Authenticate, Status, webhook, financials_view, inv_view, index
+from .views import Authenticate, Status, webhook, financials_view, inv_view
 
 urlpatterns = [
 	url(r'^authenticate$', Authenticate.as_view(), name="authenticate"),
@@ -10,12 +10,4 @@ urlpatterns = [
 	url(r'^inv', inv_view, name="inv"),
 	url(r'^financials', financials_view, name="financials"),
 	url(r'^webhook', webhook, name="webhook"),
-	url(r'^.*$', index, name='index'),
 ]
-
-import settings
-urlpatterns += patterns('',
-    url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {
-        'document_root': settings.STATIC_ROOT,
-    }),
-)
