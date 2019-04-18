@@ -72,9 +72,9 @@ body {
   <img class="mb-4" src="" alt="" width="72" height="72">
   <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
   <label for="inputEmail" class="sr-only">Email address</label>
-  {{ field.username }}
+  {{ form.username }}
   <label for="inputPassword" class="sr-only">Password</label>
-  {{ field.password }}
+  {{ form.password }}
   <button class="btn btn-lg btn-primary btn-block" type="submit" value="login">Sign in</button>
   <input type="hidden" name="next" value="{{ next }}" />
   <p class="mt-5 mb-3 text-muted">&copy; Jibe 2019</p>
