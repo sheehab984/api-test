@@ -145,6 +145,5 @@ def financials_view(request):
 	return render(request, 'exact/financials.html', locals())
 
 
-
 def index(request):
     return render(request, 'exact/index.html')
