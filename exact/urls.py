@@ -11,5 +11,4 @@ urlpatterns = [
 	url(r'^financials', financials_view, name="financials"),
 	url(r'^webhook', webhook, name="webhook"),
 	url(r'^$', index, name='index'),
-
 ]

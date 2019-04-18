@@ -61,7 +61,7 @@ ROOT_URLCONF = 'Test_Django_setup.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -129,5 +129,7 @@ EXACT_ONLINE_CLIENT_ID = "1c471360-92a0-4149-a90b-af886be7799f"
 EXACT_ONLINE_CLIENT_SECRET = "MHmMzaijm3W0"
 EXACT_ONLINE_REDIRECT_URI = "https://cryptic-dusk-50681.herokuapp.com/exact/authenticate"
 EXACT_ONLINE_DIVISION = 1064303
+
+LOGIN_REDIRECT_URL = '/exact/index'
 
 django_heroku.settings(locals())
