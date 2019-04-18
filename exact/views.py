@@ -128,17 +128,7 @@ def financials_view(request):
 	for item in e.filter("read/financial/ReceivablesListByAccount?accountId=guid'cd8e894a-4a04-47ae-bfd5-da46ef20261c'", select="InvoiceNumber, AccountName, InvoiceDate, InvoiceNumber, Amount, DueDate"):
 		data1.append(item)
 
-	df1 = pd.DataFrame.from_records(data1)
-
-	data2 = []
-	for item in e.filter("documents/Documents", filter_string="substringof('Lichtplanners B.V.', AccountName) eq true", select="SalesInvoiceNumber, DocumentDate, ID"):
-		data2.append(item)
-
-	df2 = pd.DataFrame.from_records(data2)
-
-	data3 = []
-	for item in e.filter("documents/DocumentAttachments", select="Document, FileName, Url, FileSize"):
-		data3.append(item)
+	
 
 	return render(request, 'exact/financials.html', locals())
 
