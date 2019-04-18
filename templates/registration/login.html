@@ -64,28 +64,9 @@ body {
 </style>
   </head>
   <body>
-    <div class="container">
-      <div class="row">
 
 
-
-
-    {% if form.errors %}
-      <p>Your username and password didn't match. Please try again.</p>
-    {% endif %}
-
-    {% if next %}
-      {% if user.is_authenticated %}
-        <p>Your account doesn't have access to this page. To proceed,
-        please login with an account that has access.</p>
-      {% else %}
-        <p>Please login to see this page.</p>
-      {% endif %}
-    {% endif %}
-      </div>
-    </div>
-
-    <form class="form-signin" method="post" action="{% url 'login' %}">
+  <form class="form-signin" method="post" action="{% url 'login' %}">
       {% csrf_token %}
 
   <img class="mb-4" src="" alt="" width="72" height="72">
@@ -100,10 +81,22 @@ body {
   <button class="btn btn-lg btn-primary btn-block" type="submit" value="login">Sign in</button>
   <input type="hidden" name="next" value="{{ next }}" />
   <p class="mt-5 mb-3 text-muted">&copy; Jibe 2019</p>
+  {% if form.errors %}
+    <p>Your username and password didn't match. Please try again.</p>
+  {% endif %}
+
+    {% if next %}
+      {% if user.is_authenticated %}
+        <p>Your account doesn't have access to this page. To proceed,
+        please login with an account that has access.</p>
+      {% else %}
+        <p>Please login to see this page.</p>
+      {% endif %}
+    {% endif %}
 </form>
 
-
   </body>
+
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script>
     Holder.addTheme('thumb', {
