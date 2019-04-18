@@ -64,6 +64,12 @@ body {
 </style>
   </head>
   <body>
+    <div class="container">
+      <div class="row">
+
+
+
+
     {% if form.errors %}
       <p>Your username and password didn't match. Please try again.</p>
     {% endif %}
@@ -76,7 +82,8 @@ body {
         <p>Please login to see this page.</p>
       {% endif %}
     {% endif %}
-
+      </div>
+    </div>
 
     <form class="form-signin" method="post" action="{% url 'login' %}">
       {% csrf_token %}
@@ -84,9 +91,12 @@ body {
   <img class="mb-4" src="" alt="" width="72" height="72">
   <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
   <label for="inputEmail" class="sr-only">Email address</label>
-  {{ form.username }}
+  {% for field in form %}
+
+    <input type="email" id="{{ field.username }}" class="form-control" placeholder="Email address" required autofocus>
   <label for="inputPassword" class="sr-only">Password</label>
-  {{ form.password }}
+  <input type="password" id="{{ field.password }}" class="form-control" placeholder="Password" required>
+  {% endfor %}
   <button class="btn btn-lg btn-primary btn-block" type="submit" value="login">Sign in</button>
   <input type="hidden" name="next" value="{{ next }}" />
   <p class="mt-5 mb-3 text-muted">&copy; Jibe 2019</p>
@@ -94,4 +104,13 @@ body {
 
 
   </body>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script>
+    Holder.addTheme('thumb', {
+      bg: '#55595c',
+      fg: '#eceeef',
+      text: 'Thumbnail'
+    });
+  </script>
+</body>
 </html>
