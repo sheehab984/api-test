@@ -72,12 +72,9 @@ body {
   <img class="mb-4" src="" alt="" width="72" height="72">
   <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
   <label for="inputEmail" class="sr-only">Email address</label>
-  {% for field in form %}
-
-    <input type="email" id="{{ field.username }}" class="form-control" placeholder="Email address" required autofocus>
+    <input type="text" id="{{ form.username }}" class="form-control" placeholder="username" required autofocus>
   <label for="inputPassword" class="sr-only">Password</label>
-  <input type="password" id="{{ field.password }}" class="form-control" placeholder="Password" required>
-  {% endfor %}
+  <input type="password" id="{{ form.password }}" class="form-control" placeholder="Password" required>
   <button class="btn btn-lg btn-primary btn-block" type="submit" value="login">Sign in</button>
   <input type="hidden" name="next" value="{{ next }}" />
   <p class="mt-5 mb-3 text-muted">&copy; Jibe 2019</p>
