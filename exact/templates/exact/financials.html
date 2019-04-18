@@ -55,12 +55,10 @@ th {
 	  <table class="table table-bordered table-hover" data-toggle="table" data-pagination="true" data-search="true" >
 	    <thead>
 			<tr>
-				<th data-sortable="true">Account Name</th>
 				<th data-sortable="true">InvoiceDate</th>
 				<th data-sortable="true">InvoiceNumber</th>
 				<th data-sortable="true">Amount</th>
 				<th data-sortable="true">DueDate</th>
-				<th data-sortable="true">Document date</th>
 				<th data-sortable="true">Bestandsnaam </th>
 				<th data-sortable="true">Document View Url</th>
 				<th data-sortable="true">Bestandsgroote </th>
@@ -72,7 +70,12 @@ th {
 					<tr>
 
 
-								<td>{{ item1.AccountName }}</td>
+							{% for item2 in data2 %}
+								{% if item1.InvoiceNumber == item2.SalesInvoiceNumber %}
+
+
+
+
 								<td>	<script type="text/javascript">
 								document.write(timeConverter({{ item1.InvoiceDate|slice:"6:19" }}))
 								</script></td>
@@ -81,7 +84,23 @@ th {
 								<td style="color: red; ">	<script type="text/javascript">
 		      		  document.write(timeConverter({{ item1.DueDate|slice:"6:19" }}))
 								</script></td>
-						
+
+									{% for item3 in data3 %}
+										{% if item2.ID == item3.Document %}
+
+																				<td>{{ item3.FileName }}</td>
+																				<td><a href="{{ item3.Url }}">Link</a></td>
+
+
+										{% endif %}
+									{% endfor %}
+
+
+
+
+								{% endif %}
+							{% endfor %}
+
 				{% endfor %}
 			</tbody>
 		</thead>
