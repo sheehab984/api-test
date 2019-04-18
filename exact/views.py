@@ -23,7 +23,6 @@ from itertools import chain
 from exact.api import Exact
 
 
-
 @method_decorator(user_passes_test(lambda u: u.is_staff), name="dispatch")
 class Authenticate(RedirectView):
 	pattern_name = "exact:status"
@@ -134,7 +133,7 @@ def financials_view(request):
 	df1 = pd.DataFrame.from_records(data1)
 
 	data2 = []
-	for item in e.filter("documents/Documents", filter_string="substringof('Lichtplanners B.V.', AccountName) eq true", select="ID"):
+	for item in e.filter("documents/Documents", filter_string="substringof('Lichtplanners B.V.', AccountName) eq true", select="SalesInvoiceNumber, ID"):
 		data2.append(item)
 
 	df2 = pd.DataFrame.from_records(data2)
@@ -144,6 +143,7 @@ def financials_view(request):
 		data3.append(item)
 
 	return render(request, 'exact/financials.html', locals())
+
 
 
 def index(request):
