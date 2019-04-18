@@ -98,20 +98,20 @@ def inv_view(request):
 
 	# filter returns a generator and handles pagination for you
 	data1 = []
-	for item in e.filter("inventory/ItemWarehouses",  filter_string=None, select="CurrentStock, ItemCode, ItemDescription, WarehouseDescription"):
+	for item in e.filter("inventory/ItemWarehouses",  filter_string=None, select="CurrentStock, ItemCode, ItemDescription"):
 		data1.append(item)
 
 
 	df1 = pd.DataFrame.from_records(data1)
 
 	data2 = []
-	for item in e.filter("logistics/Items", filter_string="substringof('LG', ItemGroupCode) eq true and IsSalesItem eq true"):
+	for item in e.filter("logistics/Items", filter_string="substringof('LG', ItemGroupCode) eq true and IsSalesItem eq true", select="Stock, PictureThumbnailUrl, Code"):
 		data2.append(item)
 
 	df2 = pd.DataFrame.from_records(data2)
 
 	data3 = []
-	for item in e.filter("logistics/SalesItemPrices", filter_string="EndDate eq null", select="ItemCode, Price, EndDate"):
+	for item in e.filter("logistics/SalesItemPrices", filter_string="EndDate eq null", select="ItemCode, Price"):
 		data3.append(item)
 
 
@@ -125,19 +125,19 @@ def financials_view(request):
 
 	# filter returns a generator and handles pagination for you
 	data1 = []
-	for item in e.filter("read/financial/ReceivablesListByAccount?accountId=guid'cd8e894a-4a04-47ae-bfd5-da46ef20261c'"):
+	for item in e.filter("read/financial/ReceivablesListByAccount?accountId=guid'cd8e894a-4a04-47ae-bfd5-da46ef20261c'", select="InvoiceNumber, AccountName, InvoiceDate, InvoiceNumber, Amount, DueDate"):
 		data1.append(item)
 
 	df1 = pd.DataFrame.from_records(data1)
 
 	data2 = []
-	for item in e.filter("documents/Documents", filter_string="substringof('Lichtplanners B.V.', AccountName) eq true"):
+	for item in e.filter("documents/Documents", filter_string="substringof('Lichtplanners B.V.', AccountName) eq true", select="SalesInvoiceNumber, DocumentDate, ID"):
 		data2.append(item)
 
 	df2 = pd.DataFrame.from_records(data2)
 
 	data3 = []
-	for item in e.filter("documents/DocumentAttachments"):
+	for item in e.filter("documents/DocumentAttachments", select="Document, FileName, Url, FileSize"):
 		data3.append(item)
 
 	return render(request, 'exact/financials.html', locals())
