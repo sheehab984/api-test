@@ -84,20 +84,17 @@ th {
 		      		  document.write(timeConverter({{ item1.DueDate|slice:"6:19" }}))
 								</script></td>
 
+									{% for item3 in data3 %}
+										{% if item2.ID == item3.Document %}
+
+																				<td>{{ item3.FileName }}</td>
+																				<td><a href="{{ item3.Url }}">Link</a></td>
+
+										{% endif %}
+									{% endfor %}
+
 								{% endif %}
 							{% endfor %}
-
-							{% for item3 in data3 %}
-								{% if item2.ID == item3.Document %}
-
-																		<td>{{ item3.FileName }}</td>
-																		<td><a href="{{ item3.Url }}">Link</a></td>
-
-
-								{% endif %}
-							{% endfor %}
-
-
 
 				{% endfor %}
 			</tbody>
