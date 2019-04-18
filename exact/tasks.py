@@ -1,6 +1,11 @@
 from __future__ import absolute_import, unicode_literals
 from celery import shared_task
 
+
+import pandas as pd
+from itertools import chain
+from exact.api import Exact
+
 @shared_task
 def inv_view(request):
 	e = Exact()
