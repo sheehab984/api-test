@@ -16,6 +16,7 @@ from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import TemplateView, RedirectView
+from django.contrib.auth.decorators import login_required
 
 from itertools import chain
 
@@ -89,7 +90,7 @@ def webhook(request):
 		logger.debug("error: " + request.body)
 		return HttpResponseBadRequest(e)
 
-
+@login_required
 def inv_view(request):
 	e = Exact()
 
@@ -117,6 +118,7 @@ def inv_view(request):
 
 	return render(request, 'exact/inv.html', locals())
 
+@login_required
 def financials_view(request):
 	e = Exact()
 
@@ -131,7 +133,7 @@ def financials_view(request):
 	df1 = pd.DataFrame.from_records(data1)
 
 	data2 = []
-	for item in e.filter("documents/Documents", filter_string="substringof('Lichtplanners B.V.', AccountName) eq true", select="SalesInvoiceNumber, ID"):
+	for item in e.filter("documents/Documents", filter_string="substringof('Lichtplanners B.V.', AccountName) eq true", select="ID"):
 		data2.append(item)
 
 	df2 = pd.DataFrame.from_records(data2)

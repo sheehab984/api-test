@@ -130,6 +130,6 @@ EXACT_ONLINE_CLIENT_SECRET = "MHmMzaijm3W0"
 EXACT_ONLINE_REDIRECT_URI = "https://cryptic-dusk-50681.herokuapp.com/exact/authenticate"
 EXACT_ONLINE_DIVISION = 1064303
 
-LOGIN_REDIRECT_URL = '/exact/index'
+LOGIN_REDIRECT_URL = '/exact/'
 
 django_heroku.settings(locals())
