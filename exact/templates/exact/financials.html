@@ -67,15 +67,8 @@ th {
 
 				{% for item1 in data1 %}
 					<tr>
-
-
-							{% for item2 in data2 %}
 								{% if item1.InvoiceNumber == item2.SalesInvoiceNumber %}
-
-
-
-
-								<td>	<script type="text/javascript">
+							<td>	<script type="text/javascript">
 								document.write(timeConverter({{ item1.InvoiceDate|slice:"6:19" }}))
 								</script></td>
 								<td>{{ item1.InvoiceNumber }}</td>
@@ -83,18 +76,7 @@ th {
 								<td style="color: red; ">	<script type="text/javascript">
 		      		  document.write(timeConverter({{ item1.DueDate|slice:"6:19" }}))
 								</script></td>
-
-									{% for item3 in data3 %}
-										{% if item2.ID == item3.Document %}
-
-																				<td>{{ item3.FileName }}</td>
-																				<td><a href="{{ item3.Url }}">Link</a></td>
-
-										{% endif %}
-									{% endfor %}
-
 								{% endif %}
-							{% endfor %}
 
 				{% endfor %}
 			</tbody>
