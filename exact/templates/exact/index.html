@@ -133,6 +133,7 @@ body {
       <nav class="nav nav-masthead justify-content-center">
         <a class="nav-link active" href="{% url 'exact:index' %}">Home</a>
         <a class="nav-link" href="{% url 'exact:inv' %}">Voorraad</a>
+        <a class="nav-link" href="{% url 'exact:financials' %}">Financials</a>
 
         {% if user.is_authenticated %}
         <a class="nav-link" href="{% url 'logout'%}?next={{request.path}}">Logout</a>
@@ -148,6 +149,7 @@ body {
     <p class="lead">Klik op een van de onderstaande knoppen om te beginnen</p>
     <p class="lead">
       <a href="{% url 'exact:inv' %}" class="btn btn-lg btn-secondary">Voorraad</a>
+      <a href="{% url 'exact:financials' %}" class="btn btn-lg btn-secondary">Financials</a>
     </p>
   </main>
 
