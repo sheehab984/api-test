@@ -79,7 +79,7 @@ th {
 																							{% else %}
 																							<td>{{ item2.Stock }}</td>
 																							{% endif %}
-																							<td><img src="{{ item2.PictureThumbnailUrl|addstr:"&Download=1" }}" alt="" border=3 height=100 width=100></img></td>
+																							<td><img src="{{ item2.PictureThumbnailUrl|add:"&Download=1" }}" alt="" border=3 height=100 width=100></img></td>
 
 												{% for item3 in data3 %}
 										 			{% if item.ItemCode == item3.ItemCode %}
