@@ -55,12 +55,10 @@ th {
 	  <table class="table table-bordered table-hover" data-toggle="table" data-pagination="true" data-search="true" >
 	    <thead>
 			<tr>
-				<th data-sortable="true">InvoiceDate</th>
-				<th data-sortable="true">InvoiceNumber</th>
+				<th data-sortable="true">Invoice Date</th>
+				<th data-sortable="true">Invoice Number</th>
 				<th data-sortable="true">Amount</th>
-				<th data-sortable="true">DueDate</th>
-				<th data-sortable="true">Bestandsnaam </th>
-				<th data-sortable="true">Document View Url</th>
+				<th data-sortable="true">Due Date</th>
 			</tr>
 
 			<tbody id="myTable">
@@ -71,8 +69,6 @@ th {
 
 							{% for item2 in data2 %}
 								{% if item.InvoiceNumber == item2.SalesInvoiceNumber %}
-
-
 
 
 								<td>	<script type="text/javascript">
