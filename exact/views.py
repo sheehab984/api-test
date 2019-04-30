@@ -136,6 +136,11 @@ def financials_view(request):
 	for item in e.filter("documents/Documents", filter_string="substringof('Lichtplanners B.V.', AccountName) eq true", select="SalesInvoiceNumber, ID"):
 		data2.append(item)
 
+	df2 = pd.DataFrame.from_records(data2)
+
+	data3 = []
+	for item in e.filter("documents/DocumentAttachments", select="Document, FileName, Url"):
+		data3.append(item)
 
 	return render(request, 'exact/financials.html', locals())
 
