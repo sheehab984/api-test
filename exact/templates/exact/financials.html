@@ -65,23 +65,23 @@ th {
 
 			<tbody id="myTable">
 
-				{% for item1 in data1 %}
+				{% for item in data1 %}
 					<tr>
 
 
 							{% for item2 in data2 %}
-								{% if item1.InvoiceNumber == item2.SalesInvoiceNumber %}
+								{% if item.InvoiceNumber == item2.SalesInvoiceNumber %}
 
 
 
 
 								<td>	<script type="text/javascript">
-								document.write(timeConverter({{ item1.InvoiceDate|slice:"6:19" }}))
+								document.write(timeConverter({{ item.InvoiceDate|slice:"6:19" }}))
 								</script></td>
-								<td>{{ item1.InvoiceNumber }}</td>
-								<td>{{ item1.Amount }}</td>
+								<td>{{ item.InvoiceNumber }}</td>
+								<td>{{ item.Amount }}</td>
 								<td style="color: red; ">	<script type="text/javascript">
-		      		  document.write(timeConverter({{ item1.DueDate|slice:"6:19" }}))
+		      		  document.write(timeConverter({{ item.DueDate|slice:"6:19" }}))
 								</script></td>
 
 
