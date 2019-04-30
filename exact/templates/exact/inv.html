@@ -39,7 +39,7 @@ th {
 	  <div class="btn-group float-right" role="group" aria-label="First group">
 	    <button type="button" class="btn btn-secondary"><a href="{% url 'exact:index' %}" style="color: #fff"> Home </a></button>
 	    <button type="button" class="btn btn-secondary"><a href="{% url 'exact:inv' %}" style="color: #fff">Voorraad</a></button>
-	   
+
 	  </div>
 	</div>
 	  <table class="table table-bordered table-hover" data-toggle="table" data-pagination="true" data-search="true" >
@@ -79,7 +79,7 @@ th {
 																							{% else %}
 																							<td>{{ item2.Stock }}</td>
 																							{% endif %}
-																							<td><img src="{{ item2.PictureThumbnailUrl }}" alt="" border=3 height=100 width=100></img></td>
+																							<td><img src="{{ item2.PictureThumbnailUrl|addstr:"&Download=1" }}" alt="" border=3 height=100 width=100></img></td>
 
 												{% for item3 in data3 %}
 										 			{% if item.ItemCode == item3.ItemCode %}
