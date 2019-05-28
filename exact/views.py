@@ -109,6 +109,8 @@ def inv_view(request):
 	for item in e.filter("logistics/Items", filter_string="", select="Stock, PictureThumbnailUrl, Code"):
 		data2.append(item)
 
+# substringof('LG', ItemGroupCode) eq true and IsStockItem eq true or substringof('JIMS', ItemGroupCode) eq true and IsSalesItem eq true
+
 	df2 = pd.DataFrame.from_records(data2)
 
 	data3 = []
