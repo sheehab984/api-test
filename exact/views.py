@@ -116,11 +116,11 @@ def inv_view(request):
 	for item in e.filter("logistics/SalesItemPrices", filter_string="EndDate eq null", select="ItemCode, Price"):
 		data3.append(item)
 
-	df3 = pd.DataFrame.from_records(data3)
-
-	data4 = []
-	for item in e.filter("logistics/StockPosition"):
-		data4.append(item)
+	# df3 = pd.DataFrame.from_records(data3)
+	#
+	# # data4 = []
+	# # for item in e.filter("logistics/StockPosition"):
+	# # 	data4.append(item)
 
 
 	return render(request, 'exact/inv.html', locals())

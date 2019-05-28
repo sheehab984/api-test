@@ -80,7 +80,7 @@ th {
 																							{% else %}
 																							<td>{{ item2.Stock }}</td>
 																							{% endif %}
-															
+
 												{% for item3 in data3 %}
 										 			{% if item.ItemCode == item3.ItemCode %}
 
@@ -89,13 +89,13 @@ th {
 										 			{% endif %}
 					          		{% endfor %}
 
-													{% for item4 in data4 %}
+													<!-- {% for item4 in data4 %}
 														{% if item.ItemCode == item4.ItemId %}
 
 																								<td>{{ item4.PlanningOut }}</td>
 
 														{% endif %}
-													{% endfor %}
+													{% endfor %} -->
 
                     	{% endif %}
 										{% endfor %}
