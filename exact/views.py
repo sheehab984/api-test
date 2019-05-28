@@ -106,7 +106,7 @@ def inv_view(request):
 	df1 = pd.DataFrame.from_records(data1)
 
 	data2 = []
-	for item in e.filter("logistics/Items", filter_string="substringof('LG', ItemGroupCode) eq true and substringof('JIMS', ItemGroupCode) eq true and IsSalesItem eq true", select="Stock, PictureThumbnailUrl, Code"):
+	for item in e.filter("logistics/Items", filter_string="substringof('LG', ItemGroupCode) eq true and IsSalesItem eq true or substringof('JIMS', ItemGroupCode) eq true and IsSalesItem eq true", select="Stock, PictureThumbnailUrl, Code"):
 		data2.append(item)
 
 	df2 = pd.DataFrame.from_records(data2)
