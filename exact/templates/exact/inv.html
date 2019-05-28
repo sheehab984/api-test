@@ -80,6 +80,7 @@ th {
 																							{% else %}
 																							<td>{{ item2.Stock }}</td>
 																							{% endif %}
+																							<td><img src="{{ item2.PictureThumbnailUrl|add:"&Download=1" }}" alt="" border=3 height=100 width=100></img></td>
 
 												{% for item3 in data3 %}
 										 			{% if item.ItemCode == item3.ItemCode %}
@@ -88,14 +89,6 @@ th {
 
 										 			{% endif %}
 					          		{% endfor %}
-
-													<!-- {% for item4 in data4 %}
-														{% if item.ItemCode == item4.ItemId %}
-
-																								<td>{{ item4.PlanningOut }}</td>
-
-														{% endif %}
-													{% endfor %} -->
 
                     	{% endif %}
 										{% endfor %}

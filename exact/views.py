@@ -106,8 +106,9 @@ def inv_view(request):
 	df1 = pd.DataFrame.from_records(data1)
 
 	data2 = []
-	for item in e.filter("logistics/Items", filter_string="substringof('LG', ItemGroupCode) eq true and IsSalesItem eq true or substringof('JIMS', ItemGroupCode) eq true and IsSalesItem eq true", select="Stock, Code"):
+	for item in e.filter("logistics/Items", filter_string="substringof('LG', ItemGroupCode) eq true and IsSalesItem eq true or substringof('JIMS', ItemGroupCode) eq true and IsSalesItem eq true", select="Stock, PictureThumbnailUrl, Code"):
 		data2.append(item)
+
 
 
 	df2 = pd.DataFrame.from_records(data2)
@@ -115,12 +116,6 @@ def inv_view(request):
 	data3 = []
 	for item in e.filter("logistics/SalesItemPrices", filter_string="EndDate eq null", select="ItemCode, Price"):
 		data3.append(item)
-
-	# df3 = pd.DataFrame.from_records(data3)
-	#
-	# # data4 = []
-	# # for item in e.filter("logistics/StockPosition"):
-	# # 	data4.append(item)
 
 
 	return render(request, 'exact/inv.html', locals())
