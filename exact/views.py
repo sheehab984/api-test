@@ -119,7 +119,7 @@ def inv_view(request):
 	df3 = pd.DataFrame.from_records(data3)
 
 	data4 = []
-	for item in e.filter("logistics/StockPosition", filter_string="", select=""):
+	for item in e.filter("logistics/StockPosition"):
 		data4.append(item)
 
 
