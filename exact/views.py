@@ -99,17 +99,17 @@ def inv_view(request):
 
 	# filter returns a generator and handles pagination for you
 	data1 = []
-	for item in e.filter("inventory/ItemWarehouses",  filter_string="substringof('3', WarehouseCode) eq true", select="CurrentStock, ItemCode, ItemDescription"):
+	for item in e.filter("inventory/ItemWarehouses",  filter_string="substringof('3', WarehouseCode) eq true or substringof('1', WarehouseCode) eq true", select="CurrentStock, ItemCode, ItemDescription"):
 		data1.append(item)
 
 
 	df1 = pd.DataFrame.from_records(data1)
 
 	data2 = []
-	for item in e.filter("logistics/Items", filter_string="", select="Stock, PictureThumbnailUrl, Code"):
+	for item in e.filter("logistics/Items", filter_string="substringof('LG', ItemGroupCode) eq true and IsStockItem eq true or substringof('JIMS', ItemGroupCode) eq true and IsSalesItem eq true", select="Stock, PictureThumbnailUrl, Code"):
 		data2.append(item)
 
-# substringof('LG', ItemGroupCode) eq true and IsStockItem eq true or substringof('JIMS', ItemGroupCode) eq true and IsSalesItem eq true
+
 
 	df2 = pd.DataFrame.from_records(data2)
 
