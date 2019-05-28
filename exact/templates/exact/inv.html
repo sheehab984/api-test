@@ -90,6 +90,14 @@ th {
 										 			{% endif %}
 					          		{% endfor %}
 
+													{% for item4 in data4 %}
+														{% if item.ItemCode == item4.ItemId %}
+
+																								<td>{{ item4.PlanningOut }}</td>
+
+														{% endif %}
+													{% endfor %}
+
                     	{% endif %}
 										{% endfor %}
 
