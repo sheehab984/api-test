@@ -62,18 +62,26 @@ th {
 			              	{% if item.ItemCode == item2.Code %}
 																							<td>{{ item.ItemCode }}</td>
 																							<td>{{ item.ItemDescription }}</td>
-																							{% if item.CurrentStock == 0 %}
+
+
+
+														{% for item4 in data4 %}
+															{% if item4.ItemCode == item2.Code %}
+																							{% if item4.CurrentStock == 0 %}
 																							<td> - </td>
 																							{% else %}
-																							<td>{{ item.CurrentStock }}</td>
+																							<td>{{ item4.CurrentStock }}</td>
 																							{% endif %}
-																							{% if item2.Stock|sub:item.CurrentStock == "" %}
+																							{% if item2.Stock|sub:item4.CurrentStock == "" %}
 																							<td> - </td>
-																							{% elif item2.Stock|sub:item.CurrentStock == 0 %}
+																							{% elif item2.Stock|sub:item4.CurrentStock == 0 %}
 																							<td> - </td>
 																							{% else %}
-																							<td>{{ item2.Stock|sub:item.CurrentStock}}</td>
+																							<td>{{ item2.Stock|sub:item4.CurrentStock}}</td>
 																							{% endif %}
+																{% endif %}
+													   {% endfor %}
+
 																							{% if item2.Stock == None %}
 																							<td> - </td>
 																							{% else %}
