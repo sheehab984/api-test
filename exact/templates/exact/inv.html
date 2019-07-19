@@ -79,15 +79,15 @@ th {
 																							{% else %}
 																							<td>{{ item2.Stock|sub:item4.CurrentStock}}</td>
 																							{% endif %}
-															{% endif %}
-													  {% endfor %}
+
 
 																							{% if item2.Stock == None %}
 																							<td> - </td>
 																							{% else %}
 																							<td>{{ item2.Stock }}</td>
 																							{% endif %}
-
+																							{% endif %}
+																						{% endfor %}
 
 												{% for item3 in data3 %}
 										 			{% if item.ItemCode == item3.ItemCode %}
