@@ -82,7 +82,13 @@ th {
 															{% endif %}
 													  {% endfor %}
 
-
+																							{% if item.CurrentStock == "" %}
+																							<td> - </td>
+																							{% elif item.CurrentStock == 0 %}
+																							<td> - </td>
+																							{% else %}
+																							<td>{{ item.CurrentStock }}</td>
+																							{% endif %}
 
 
 												{% for item3 in data3 %}
@@ -92,13 +98,7 @@ th {
 
 										 			{% endif %}
 					          		{% endfor %}
-																				{% if item.CurrentStock == "" %}
-																				<td> - </td>
-																				{% elif item.CurrentStock == 0 %}
-																				<td> - </td>
-																				{% else %}
-																				<td>{{ item.CurrentStock }}</td>
-																				{% endif %}
+
                     	{% endif %}
 										{% endfor %}
 
