@@ -137,6 +137,25 @@ def financials_view(request):
 
 	return render(request, 'exact/financials.html', locals())
 
+@login_required
+def financials_view(request):
+	e = Exact()
+
+	# first param is the resource.
+	# see https://start.exactonline.nl/docs/HlpRestAPIResources.aspx
+
+	# filter returns a generator and handles pagination for you
+	data1 = []
+	for item in e.filter("read/financial/ReceivablesListByAccount?accountId=guid'cd8e894a-4a04-47ae-bfd5-da46ef20261c'", select="InvoiceNumber, InvoiceDate"):
+		data1.append(item)
+
+	df1 = pd.DataFrame.from_records(data1)
+
+	data2 = []
+	for item in e.filter("salesinvoice/SalesInvoices", select="SalesInvoiceLines, InvoiceNumber"):
+		data2.append(item)
+
+	return render(request, 'exact/financials2.html', locals())
 
 
 def index(request):
