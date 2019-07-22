@@ -45,40 +45,46 @@ th {
 			<tr>
 				<th data-sortable="true"  style="padding: 0">ItemCode</th>
 					<th data-sortable="true">ItemDescription</th>
+					<th data-sortable="true">Voorraad Lichtplanners</th>
+					<th data-sortable="true">Vooraad Jibe</th>
 					<th data-sortable="true">Vooraad Totaal</th>
-					<th data-sortable="true">Vooraad Totaal</th>
-					<th data-sortable="true">Vooraad Filter mag 1</th>
-					<th data-sortable="true">Vooraad Filter mag 1</th>
-					<!-- <th data-sortable="true">Vooraad Filter mag 3</th>
-					<th data-sortable="true">Vooraad Filter mag 3</th> -->
-					<!-- <th data-sortable="true">&euro;</th>
-					<th data-sortable="true">&euro;</th> -->
+					<th data-sortable="true">&euro;</th>
+					<th data-sortable="true">&euro;</th>
 			</tr>
 
 			<tbody id="myTable">
 				{% for item in data1 %}
 					<tr>
 										{% for item2 in data2 %}
-											{% if item.ItemCode == item2.Code %}
-											<td>{{ item.ItemCode }}</td>
-											<td>{{ item.ItemDescription }}</td>
-											<td>{{ item.CurrentStock }}</td>
-											<td>{{ item2.Stock }}</td>
-			              	{% if item.ItemCode == item2.Code and item.WarehouseCode == "1" %}
+			              	{% if item.ItemCode == item2.Code %}
+																							<td>{{ item.ItemCode }}</td>
+																							<td>{{ item.ItemDescription }}</td>
+																							{% if item.CurrentStock == 0 %}
+																							<td> - </td>
+																							{% else %}
 																							<td>{{ item.CurrentStock }}</td>
+																							{% endif %}
+																							{% if item2.Stock|sub:item.CurrentStock == "" %}
+																							<td> - </td>
+																							{% elif item2.Stock|sub:item.CurrentStock == 0 %}
+																							<td> - </td>
+																							{% else %}
+																							<td>{{ item2.Stock|sub:item.CurrentStock}}</td>
+																							{% endif %}
+																							{% if item2.Stock == None %}
+																							<td> - </td>
+																							{% else %}
 																							<td>{{ item2.Stock }}</td>
-											{% endif %}
-											<!-- {% if item.ItemCode == item2.Code and item.WarehouseCode == "3" %}
-																							<td>{{ item.CurrentStock }}</td>
-																							<td>{{ item2.Stock }}</td> -->
-											<!-- {% endif %}
+																							{% endif %}
+
+
 												{% for item3 in data3 %}
 										 			{% if item.ItemCode == item3.ItemCode %}
 
-															<td>{{ item3.Price }}</td>
+																							<td>{{ item3.Price }}</td>
 
 										 			{% endif %}
-					          		{% endfor %} -->
+					          		{% endfor %}
 
                     	{% endif %}
 										{% endfor %}
