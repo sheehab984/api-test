@@ -15,14 +15,11 @@ table {
   border-collapse: collapse;
   width: 100%;
 }
-
 th, td {
   text-align: left;
   padding: 8px;
 }
-
 tr:nth-child(even){background-color: #f2f2f2}
-
 th {
   background-color: #2477B8;
   color: white;
@@ -34,7 +31,7 @@ th {
 
 
 <div class="container">
-	<div class=" btn-toolbar justify-content-between"role="toolbar" aria-label="Toolbar with button groups" style="margin-top: 10px; padding-top: 10px">
+	<div class=" btn-toolbar justify-content-between" role="toolbar" aria-label="Toolbar with button groups" style="margin-top: 10px; padding-top: 10px">
 		<h2>Voorraad</h2>
 	  <div class="btn-group float-right" role="group" aria-label="First group">
 	    <button type="button" class="btn btn-secondary"><a href="{% url 'exact:index' %}" style="color: #fff"> Home </a></button>
@@ -43,44 +40,55 @@ th {
 
 	  </div>
 	</div>
-	  <table class="table table-bordered table-hover"  data-toggle="table" data-pagination="true" data-search="true" >
+	  <table class="table table-bordered table-hover" data-toggle="table" data-pagination="true" data-search="true" >
 	    <thead>
 			<tr>
 				<th data-sortable="true"  style="padding: 0">ItemCode</th>
 					<th data-sortable="true">ItemDescription</th>
-					<th data-sortable="true">Vooraad Totaal</th>
 					<th data-sortable="true">Voorraad Lichtplanners</th>
 					<th data-sortable="true">Vooraad Jibe</th>
-
+					<th data-sortable="true">Vooraad Totaal</th>
 					<th data-sortable="true">&euro;</th>
 					<th data-sortable="true">&euro;</th>
 			</tr>
 
 			<tbody id="myTable">
-			{% for item in data1 %}
+				{% for item in data1 %}
 					<tr>
-					{% for item2 in data2 %}
-			            {% if item.ItemCode == item2.Code %}
-																<td>{{ item.ItemCode }}</td>
-																<td>{{ item.ItemDescription }}</td>
-																<td>{{ item.CurrentStock }}</td>
-									{% endif %}
-						{% endfor %}
-						{% for item4 in data4 %}
-									{% if item4.ItemCode == item2.Code %}
-																<td>{{ item4.CurrentStock }}</td>
-									{% endif %}
-						{% endfor %}
-						{% for item5 in data5 %}
-									{% if item5.ItemCode == item2.Code %}
-																<td>{{ item5.CurrentStock }}</td>
-									{% endif %}
-						{% endfor %}
-						{% for item3 in data3 %}
-									{% if item3.ItemCode == item2.Code %}
-																<td>{{ item3.Price }}</td>
-									{% endif %}
-						{% endfor %}
+										{% for item2 in data2 %}
+			              	{% if item.ItemCode == item2.Code %}
+																							<td>{{ item.ItemCode }}</td>
+																							<td>{{ item.ItemDescription }}</td>
+																							{% if item.CurrentStock == 0 %}
+																							<td> - </td>
+																							{% else %}
+																							<td>{{ item.CurrentStock }}</td>
+																							{% endif %}
+																							{% if item2.Stock|sub:item.CurrentStock == "" %}
+																							<td> - </td>
+																							{% elif item2.Stock|sub:item.CurrentStock == 0 %}
+																							<td> - </td>
+																							{% else %}
+																							<td>{{ item2.Stock|sub:item.CurrentStock}}</td>
+																							{% endif %}
+																							{% if item2.Stock == None %}
+																							<td> - </td>
+																							{% else %}
+																							<td>{{ item2.Stock }}</td>
+																							{% endif %}
+
+
+												{% for item3 in data3 %}
+										 			{% if item.ItemCode == item3.ItemCode %}
+
+																							<td>{{ item3.Price }}</td>
+
+										 			{% endif %}
+					          		{% endfor %}
+
+                    	{% endif %}
+										{% endfor %}
+
 					</tr>
 				{% endfor %}
 			</tbody>
