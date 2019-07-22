@@ -59,12 +59,13 @@ th {
 			<tbody id="myTable">
 			{% for item in data1 %}
 					<tr>
-				{% for item2 in data2 %}
+					{% for item2 in data2 %}
 			            {% if item.ItemCode == item2.Code %}
 																<td>{{ item.ItemCode }}</td>
 																<td>{{ item.ItemDescription }}</td>
 																<td>{{ item.CurrentStock }}</td>
 									{% endif %}
+						{% endfor %}
 						{% for item4 in data4 %}
 									{% if item4.ItemCode == item2.Code %}
 																<td>{{ item4.CurrentStock }}</td>
@@ -79,9 +80,7 @@ th {
 									{% if item3.ItemCode == item2.Code %}
 																<td>{{ item3.Price }}</td>
 									{% endif %}
-					{% endfor %}
-
-				{% endfor %}
+						{% endfor %}
 					</tr>
 				{% endfor %}
 			</tbody>
