@@ -171,3 +171,6 @@ def financials_view(request):
 
 def index(request):
     return render(request, 'exact/index.html')
+
+def tables(request):
+    return render(request, 'exact/tables.html')

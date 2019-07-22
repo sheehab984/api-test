@@ -62,21 +62,7 @@ th {
 			            {% if item.ItemCode == item2.Code %}
 																<td>{{ item.ItemCode }}</td>
 																<td>{{ item.ItemDescription }}</td>
-
-															{% if item4.ItemCode == item2.Code %}
-																<td>{{ item4.CurrentStock }}</td>
-
-															{% else %}
-																<td>-</td>
-															{% endif %}
-
-															{% if item5.ItemCode == item2.Code %}
-																<td>{{ item5.CurrentStock }}</td>
-
-															{% else %}
-																<td>-</td>
-															{% endif %}
-										{% endif %}
+																<td>{{ item.CurrentStock }}</td>
 						{% endfor %}
 					</tr>
 				{% endfor %}
