@@ -48,6 +48,7 @@ th {
 					<th data-sortable="true">Voorraad Lichtplanners</th>
 					<th data-sortable="true">Vooraad Jibe</th>
 					<th data-sortable="true">Vooraad Totaal</th>
+					<th data-sortable="true">4</th>
 					<th data-sortable="true">&euro;</th>
 					<th data-sortable="true">&euro;</th>
 			</tr>
@@ -59,23 +60,10 @@ th {
 			              	{% if item.ItemCode == item2.Code %}
 																							<td>{{ item.ItemCode }}</td>
 																							<td>{{ item.ItemDescription }}</td>
-																							{% if item.CurrentStock == 0 %}
-																							<td> - </td>
-																							{% else %}
 																							<td>{{ item.CurrentStock }}</td>
-																							{% endif %}
-																							{% if item2.Stock|sub:item.CurrentStock == "" %}
-																							<td> - </td>
-																							{% elif item2.Stock|sub:item.CurrentStock == 0 %}
-																							<td> - </td>
-																							{% else %}
 																							<td>{{ item2.Stock|sub:item.CurrentStock}}</td>
-																							{% endif %}
-																							{% if item2.Stock == None %}
-																							<td> - </td>
-																							{% else %}
 																							<td>{{ item2.Stock }}</td>
-																							{% endif %}
+
 												{% for item4 in data4 %}
 													{% if item.ItemCode == item4.ItemCode %}
 
