@@ -64,13 +64,14 @@ th {
 																<td>{{ item.ItemCode }}</td>
 																<td>{{ item.ItemDescription }}</td>
 																<td>{{ item.CurrentStock }}</td>
-										{% if item4.ItemCode == item2.Code %}
+									{% endif %}
+									{% if item4.ItemCode == item2.Code %}
 																<td>{{ item4.CurrentStock }}</td>
-										{% endif %}
+									{% endif %}
 											<!-- {% if item3.ItemCode == item2.Code %}
 																<td>{{ item3.Price }}</td>
 											{% endif %} -->
-									{% endif %}
+
 						{% endfor %}
 					</tr>
 				{% endfor %}
