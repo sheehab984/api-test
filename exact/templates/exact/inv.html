@@ -48,8 +48,10 @@ th {
 			<tr>
 				<th data-sortable="true"  style="padding: 0">ItemCode</th>
 					<th data-sortable="true">ItemDescription</th>
+					<th data-sortable="true">Vooraad Totaal</th>
 					<th data-sortable="true">Voorraad Lichtplanners</th>
 					<th data-sortable="true">Vooraad Jibe</th>
+
 					<th data-sortable="true">&euro;</th>
 					<th data-sortable="true">&euro;</th>
 			</tr>
@@ -61,42 +63,33 @@ th {
 			              	{% if item.ItemCode == item2.Code %}
 																							<td>{{ item.ItemCode }}</td>
 																							<td>{{ item.ItemDescription }}</td>
-
-											<!--Lichtplanners voorraad -->
-											{% if item.ItemCode == item2.Code %}
-												 {% ifequal item.WarehouseCode '3' %}
-																							{% if item.CurrentStock == 0 %}
-																							<td> - </td>
-																							{% elif item.CurrentStock == "" %}
-																							<td> - </td>
-																							{% else %}
 																							<td>{{ item.CurrentStock }}</td>
-																							{% endif %}
-												{% endifequal %}
-											{% endif %}
-											<!--END Lichtplanners voorraad -->
 
-											<!--Jibe voorraad -->
-											{% if item.ItemCode == item2.Code %}
-												{% ifequal item.WarehouseCode '1' %}
-																							{% if item.CurrentStock == 0 %}
-																							<td> - </td>
-																							{% elif item.CurrentStock == "" %}
-																							<td> - </td>
-																							{% else %}
-																							<td>{{ item.CurrentStock }}</td>
-																							{% endif %}
-												{% endifequal %}
-											{% endif %}
-											<!--END Jibe voorraad -->
 
-											<!--Prijs van alle producten -->
-													{% for item3 in data3 %}
-										 				{% if item2.Code == item3.ItemCode %}
+														{% for item4 in data4 %}
+															{% if item4.ItemCode == item2.Code %}
+
+																							<td>{{ item4.CurrentStock }}</td>
+
+															{% endif %}
+													  {% endfor %}
+
+														{% for item5 in data5 %}
+															{% if item5.ItemCode == item2.Code %}
+
+																							<td>{{ item5.CurrentStock }}</td>
+
+															{% endif %}
+													  {% endfor %}
+
+
+														{% for item3 in data3 %}
+										 					{% if item.ItemCode == item3.ItemCode %}
+
 																							<td>{{ item3.Price }}</td>
-											 			{% endif %}
-						          		{% endfor %}
-											<!--END Prijs van alle producten -->
+
+										 			{% endif %}
+					          		{% endfor %}
 
                     	{% endif %}
 										{% endfor %}

@@ -114,6 +114,17 @@ def inv_view(request):
 	for item in e.filter("logistics/SalesItemPrices", filter_string="EndDate eq null", select="ItemCode, Price"):
 		data3.append(item)
 
+	df3 = pd.DataFrame.from_records(data3)
+
+	data4 = []
+	for item in e.filter("inventory/ItemWarehouses",  filter_string="substringof('3', WarehouseCode) eq true", select="CurrentStock, ItemCode, ItemDescription"):
+		data4.append(item)
+
+	df4 = pd.DataFrame.from_records(data4)
+
+	data5 = []
+	for item in e.filter("inventory/ItemWarehouses",  filter_string="substringof('1', WarehouseCode) eq true", select="CurrentStock, ItemCode, ItemDescription"):
+		data5.append(item)
 
 	return render(request, 'exact/inv.html', locals())
 
