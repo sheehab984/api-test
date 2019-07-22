@@ -45,10 +45,12 @@ th {
 			<tr>
 				<th data-sortable="true"  style="padding: 0">ItemCode</th>
 					<th data-sortable="true">ItemDescription</th>
-					<th data-sortable="true">Voorraad Lichtplanners</th>
-					<th data-sortable="true">Vooraad Jibe</th>
-					<th data-sortable="true">Vooraad Totaal</th>
-					<th data-sortable="true">4</th>
+					<th data-sortable="true">Voorraad Totaal 1</th>
+					<th data-sortable="true">Voorraad Totaal 2</th>
+					<th data-sortable="true">ItemCode</th>
+					<th data-sortable="true">ItemDescription</th>
+					<th data-sortable="true">Vooraad Filter mag 1</th>
+					<th data-sortable="true">Vooraad Filter mag 2</th>
 					<th data-sortable="true">&euro;</th>
 					<th data-sortable="true">&euro;</th>
 			</tr>
@@ -57,25 +59,21 @@ th {
 				{% for item in data1 %}
 					<tr>
 										{% for item2 in data2 %}
-			              	{% if item.ItemCode == item2.Code %}
-																							<td>{{ item.ItemCode }}</td>
-																							<td>{{ item.ItemDescription }}</td>
+											{% if item.ItemCode == item2.Code %}
+											<td>{{ item.ItemCode }}</td>
+											<td>{{ item.ItemDescription }}</td>
+			              	{% if item.ItemCode == item2.Code and item.WarehouseCode == "1" %}
 																							<td>{{ item.CurrentStock }}</td>
-																							<td>{{ item2.Stock|sub:item.CurrentStock}}</td>
 																							<td>{{ item2.Stock }}</td>
-
-												{% for item4 in data4 %}
-													{% if item.ItemCode == item4.ItemCode %}
-
-															<td>{{ item4.CurrentStock }}</td>
-
-													{% endif %}
-												{% endfor %}
-
+											{% endif %}
+											{% if item.ItemCode == item2.Code and item.WarehouseCode == "3" %}
+																							<td>{{ item.CurrentStock }}</td>
+																							<td>{{ item2.Stock }}</td>
+											{% endif %}
 												{% for item3 in data3 %}
 										 			{% if item.ItemCode == item3.ItemCode %}
 
-																							<td>{{ item3.Price }}</td>
+															<td>{{ item3.Price }}</td>
 
 										 			{% endif %}
 					          		{% endfor %}
