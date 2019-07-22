@@ -63,41 +63,55 @@ th {
 																							<td>{{ item.ItemCode }}</td>
 																							<td>{{ item.ItemDescription }}</td>
 
+											<!--Lichtplanners voorraad -->
+											{% if item.ItemCode == item2.Code and substringof('3', item.WarehouseCode) eq true %}
 
-
-														{% for item4 in data4 %}
-															{% if item4.ItemCode == item2.Code %}
-																							{% if item4.CurrentStock == 0 %}
+																							{% if item.CurrentStock == 0 %}
 																							<td> - </td>
-																							{% else %}
-																							<td>{{ item4.CurrentStock }}</td>
-																							{% endif %}
-																							{% if item2.Stock|sub:item4.CurrentStock == "" %}
+																							{% elif item.CurrentStock == "" %}
 																							<td> - </td>
-																							{% elif item2.Stock|sub:item4.CurrentStock == 0 %}
-																							<td> - </td>
-																							{% else %}
-																							<td>{{ item2.Stock|sub:item4.CurrentStock}}</td>
-																							{% endif %}
-															{% endif %}
-													  {% endfor %}
-
-																							{% if item.CurrentStock == "" %}
-																							<td> - </td>
-																							{% elif item.CurrentStock == 0 %}
-																							<td> - </td>													
 																							{% else %}
 																							<td>{{ item.CurrentStock }}</td>
 																							{% endif %}
 
+											{% endif %}
+											<!--END Lichtplanners voorraad -->
 
-												{% for item3 in data3 %}
-										 			{% if item.ItemCode == item3.ItemCode %}
+											<!--Jibe voorraad -->
+											{% if item.ItemCode == item2.Code and substringof('1', item.WarehouseCode) eq true %}
 
+																							{% if item.CurrentStock == 0 %}
+																							<td> - </td>
+																							{% elif item.CurrentStock == "" %}
+																							<td> - </td>
+																							{% else %}
+																							<td>{{ item.CurrentStock }}</td>
+																							{% endif %}
+
+											{% endif %}
+											<!--END Jibe voorraad -->
+
+											<!--Totaal voorraad -->
+											{% if item.ItemCode == item2.Code %}
+
+																							{% if item.CurrentStock == "" %}
+																							<td> - </td>
+																							{% elif item.CurrentStock == 0 %}
+																							<td> - </td>
+																							{% else %}
+																							<td>{{ item.CurrentStock }}</td>
+																							{% endif %}
+
+											{% endif %}
+											<!--END Totaal voorraad -->
+
+											<!--Prijs van alle producten -->
+													{% for item3 in data3 %}
+										 				{% if item.ItemCode == item3.ItemCode %}
 																							<td>{{ item3.Price }}</td>
-
-										 			{% endif %}
-					          		{% endfor %}
+											 			{% endif %}
+						          		{% endfor %}
+											<!--END Prijs van alle producten -->
 
                     	{% endif %}
 										{% endfor %}

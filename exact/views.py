@@ -102,14 +102,11 @@ def inv_view(request):
 	for item in e.filter("inventory/ItemWarehouses",  filter_string="substringof('3', WarehouseCode) eq true or substringof('1', WarehouseCode) eq true", select="CurrentStock, ItemCode, ItemDescription"):
 		data1.append(item)
 
-
 	df1 = pd.DataFrame.from_records(data1)
 
 	data2 = []
 	for item in e.filter("logistics/Items", filter_string="substringof('LG', ItemGroupCode) eq true and IsSalesItem eq true or substringof('JIMS', ItemGroupCode) eq true and IsSalesItem eq true", select="Stock, Code"):
 		data2.append(item)
-
-
 
 	df2 = pd.DataFrame.from_records(data2)
 
@@ -117,12 +114,6 @@ def inv_view(request):
 	for item in e.filter("logistics/SalesItemPrices", filter_string="EndDate eq null", select="ItemCode, Price"):
 		data3.append(item)
 
-	data4 = []
-	for item in e.filter("inventory/ItemWarehouses",  filter_string="substringof('3', WarehouseCode) eq true", select="CurrentStock, ItemCode, ItemDescription"):
-		data4.append(item)
-
-
-	df4 = pd.DataFrame.from_records(data4)
 
 	return render(request, 'exact/inv.html', locals())
 
