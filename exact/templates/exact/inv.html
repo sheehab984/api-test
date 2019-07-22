@@ -76,7 +76,13 @@ th {
 																							{% else %}
 																							<td>{{ item2.Stock }}</td>
 																							{% endif %}
+												{% for item4 in data4 %}
+													{% if item.ItemCode == item4.ItemCode %}
 
+															<td>{{ item4.CurrentStock }}</td>
+
+													{% endif %}
+												{% endfor %}
 
 												{% for item3 in data3 %}
 										 			{% if item.ItemCode == item3.ItemCode %}
