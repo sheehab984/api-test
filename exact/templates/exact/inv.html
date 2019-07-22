@@ -64,8 +64,8 @@ th {
 																							<td>{{ item.ItemDescription }}</td>
 
 											<!--Lichtplanners voorraad -->
-											{% if item.ItemCode == item2.Code and substringof('3', item.WarehouseCode) eq true %}
-
+											{% if item.ItemCode == item2.Code %}
+												 {% ifequal item.WarehouseCode '3' %}
 																							{% if item.CurrentStock == 0 %}
 																							<td> - </td>
 																							{% elif item.CurrentStock == "" %}
@@ -73,13 +73,13 @@ th {
 																							{% else %}
 																							<td>{{ item.CurrentStock }}</td>
 																							{% endif %}
-
+												{% endifequal %}
 											{% endif %}
 											<!--END Lichtplanners voorraad -->
 
 											<!--Jibe voorraad -->
-											{% if item.ItemCode == item2.Code and substringof('1', item.WarehouseCode) eq true %}
-
+											{% if item.ItemCode == item2.Code %}
+												{% ifequal item.WarehouseCode '1' %}
 																							{% if item.CurrentStock == 0 %}
 																							<td> - </td>
 																							{% elif item.CurrentStock == "" %}
@@ -87,7 +87,7 @@ th {
 																							{% else %}
 																							<td>{{ item.CurrentStock }}</td>
 																							{% endif %}
-
+												{% endifequal %}
 											{% endif %}
 											<!--END Jibe voorraad -->
 
