@@ -48,7 +48,6 @@ th {
 			<tr>
 				<th data-sortable="true"  style="padding: 0">ItemCode</th>
 					<th data-sortable="true">ItemDescription</th>
-					<th data-sortable="true">Vooraad Totaal</th>
 					<th data-sortable="true">Voorraad Lichtplanners</th>
 					<th data-sortable="true">Vooraad Jibe</th>
 
@@ -59,41 +58,26 @@ th {
 			<tbody id="myTable">
 				{% for item in data1 %}
 					<tr>
-										{% for item2 in data2 %}
-			              	{% if item.ItemCode == item2.Code %}
-																							<td>{{ item.ItemCode }}</td>
-																							<td>{{ item.ItemDescription }}</td>
-																							<td>{{ item.CurrentStock }}</td>
+						{% for item2 in data2 %}
+			            {% if item.ItemCode == item2.Code %}
+																<td>{{ item.ItemCode }}</td>
+																<td>{{ item.ItemDescription }}</td>
 
-
-														{% for item4 in data4 %}
 															{% if item4.ItemCode == item2.Code %}
+																<td>{{ item4.CurrentStock }}</td>
 
-																							<td>{{ item4.CurrentStock }}</td>
-
+															{% else %}
+																<td>-</td>
 															{% endif %}
-													  {% endfor %}
 
-														{% for item5 in data5 %}
 															{% if item5.ItemCode == item2.Code %}
+																<td>{{ item5.CurrentStock }}</td>
 
-																							<td>{{ item5.CurrentStock }}</td>
-
+															{% else %}
+																<td>-</td>
 															{% endif %}
-													  {% endfor %}
-
-
-														{% for item3 in data3 %}
-										 					{% if item.ItemCode == item3.ItemCode %}
-
-																							<td>{{ item3.Price }}</td>
-
-										 			{% endif %}
-					          		{% endfor %}
-
-                    	{% endif %}
-										{% endfor %}
-
+										{% endif %}
+						{% endfor %}
 					</tr>
 				{% endfor %}
 			</tbody>
