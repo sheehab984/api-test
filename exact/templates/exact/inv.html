@@ -48,6 +48,7 @@ th {
 			<tr>
 				<th data-sortable="true"  style="padding: 0">ItemCode</th>
 					<th data-sortable="true">ItemDescription</th>
+					<th data-sortable="true">Vooraad Totaal</th>
 					<th data-sortable="true">Voorraad Lichtplanners</th>
 					<th data-sortable="true">Vooraad Jibe</th>
 
@@ -63,10 +64,13 @@ th {
 																<td>{{ item.ItemCode }}</td>
 																<td>{{ item.ItemDescription }}</td>
 																<td>{{ item.CurrentStock }}</td>
+										{% if item4.ItemCode == item2.Code %}
 																<td>{{ item4.CurrentStock }}</td>
-																<td>{{ item5.CurrentStock }}</td>
-
 										{% endif %}
+											<!-- {% if item3.ItemCode == item2.Code %}
+																<td>{{ item3.Price }}</td>
+											{% endif %} -->
+									{% endif %}
 						{% endfor %}
 					</tr>
 				{% endfor %}
