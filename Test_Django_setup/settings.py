@@ -125,10 +125,10 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 EXACT_ONLINE_API_URL = "https://start.exactonline.nl/api"
-EXACT_ONLINE_CLIENT_ID = "1c471360-92a0-4149-a90b-af886be7799f"
-EXACT_ONLINE_CLIENT_SECRET = "MHmMzaijm3W0"
-EXACT_ONLINE_REDIRECT_URI = "https://warm-cliffs-91099.herokuapp.com/exact/authenticate"
-EXACT_ONLINE_DIVISION = 1064303
+EXACT_ONLINE_CLIENT_ID = "10d49bca-3657-41d2-ad9c-c398c4e32aef"
+EXACT_ONLINE_CLIENT_SECRET = "2hYy8XZqigMp"
+EXACT_ONLINE_REDIRECT_URI = "https://www.google.nl/"
+EXACT_ONLINE_DIVISION = 1775873
 
 LOGIN_REDIRECT_URL = '/exact/'
 
