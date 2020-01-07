@@ -40,7 +40,7 @@ th {
 
 	  </div>
 	</div>
-	  <table class="table table-bordered table-hover" data-toggle="table" data-pagination="true" data-search="true" >
+	  <table class="table table-bordered table-hover" data-toggle="table" data-pagination="true" data-show-extended-pagination="true" data-search="true" >
 	    <thead>
 			<tr>
 				<th data-sortable="true"  style="padding: 0">ItemCode</th>
@@ -55,71 +55,65 @@ th {
 			<tbody id="myTable">
 				{% for item in data1 %}
 					<tr>
-										{% for item2 in data2 %}
-			              	{% if item.ItemCode == item2.Code %}
-																							<td>{{ item.ItemCode }}</td>
-																							<td>{{ item.ItemDescription }}</td>
-																							{% if item.CurrentStock == 0 %}
-																							<td> - </td>
-																							{% else %}
-																							<td>{{ item.CurrentStock }}</td>
-																							{% endif %}
-																							{% if item2.Stock|sub:item.CurrentStock == "" %}
-																							<td> - </td>
-																							{% elif item2.Stock|sub:item.CurrentStock == 0 %}
-																							<td> - </td>
-																							{% else %}
-																							<td>{{ item2.Stock|sub:item.CurrentStock}}</td>
-																							{% endif %}
-																							{% if item2.Stock == None %}
-																							<td> - </td>
-																							{% else %}
-																							<td>{{ item2.Stock }}</td>
-																							{% endif %}
+					{% for item2 in data2 %}
+			      {% if item.ItemCode == item2.Code %}
+						<td>{{ item.ItemCode }}</td>
+						<td>{{ item.ItemDescription }}</td>
+									{% if item.CurrentStock == 0 %}
+									 <td> - </td>
+									{% else %}
+									 <td>{{ item.CurrentStock }}</td>
+									{% endif %}
+									{% if item2.Stock|sub:item.CurrentStock == "" %}
+									 <td> - </td>
+							  	{% elif item2.Stock|sub:item.CurrentStock == 0 %}
+									 <td> - </td>
+									{% else %}
+								   <td>{{ item2.Stock|sub:item.CurrentStock}}</td>
+									{% endif %}
+									{% if item2.Stock == None %}
+									 <td> - </td>
+									{% else %}
+										<td>{{ item2.Stock }}</td>
+									{% endif %}
 
+						 {% for item3 in data3 %}
+							{% if item.ItemCode == item3.ItemCode %}
+								<td>{{ item3.Price }}</td>
+				 			{% endif %}
+         		 {% endfor %}
 
-												{% for item3 in data3 %}
-										 			{% if item.ItemCode == item3.ItemCode %}
-
-																							<td>{{ item3.Price }}</td>
-
-										 			{% endif %}
-					          		{% endfor %}
-
-                    	{% endif %}
-										{% endfor %}
-
-					</tr>
-				{% endfor %}
+            {% endif %}
+					 {% endfor %}
+				   </tr>
+				 {% endfor %}
 			</tbody>
 		</thead>
 	</table>
 	</div>
 	</div>
-    {% for i in data %}
-        {{ i }}<br><br>
-    {% endfor %}
+
 </body>
-<script>
-$(document).ready(function(){
-  $("#myInput").on("keyup", function() {
-    var value = $(this).val().toLowerCase();
-    $("#myTable tr").filter(function() {
-      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-    });
-  });
-});
-</script>
-<script>
-var seen = {};
-$('table tr').each(function() {
-    var txt = $(this).children("td:eq(0)").text();
-    console.log(txt)
-    if (seen[txt])
-        $(this).remove();
-    else
-        seen[txt] = true;
-});
-</script>
+	<script>
+	$(document).ready(function(){
+	  $("#myInput").on("keyup", function() {
+	    var value = $(this).val().toLowerCase();
+	    $("#myTable tr").filter(function() {
+	      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	    });
+	  });
+	});
+	</script>
+	<script>
+	var seen = {};
+	$('table tr').each(function() {
+	    var txt = $(this).children("td:eq(0)").text();
+	    console.log(txt)
+	    if (seen[txt])
+	        $(this).remove();
+	    else
+	        seen[txt] = true;
+	});
+	</script>
 <script src="https://unpkg.com/bootstrap-table@1.14.2/dist/bootstrap-table.min.js"></script>
 </html>
